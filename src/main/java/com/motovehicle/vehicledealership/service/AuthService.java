@@ -1,5 +1,6 @@
 package com.motovehicle.vehicledealership.service;
 
+
 import com.motovehicle.vehicledealership.model.UserEntity;
 import com.motovehicle.vehicledealership.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +12,7 @@ public class AuthService {
     @Autowired
     private UserRepository userRepo;
 
-    public void register(RegisterRequest request) {
+    public void register(UserEntity request) {
         UserEntity user = UserEntity.builder()
                 .username(request.getUsername())
                 .email(request.getEmail())
