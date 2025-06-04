@@ -1,6 +1,5 @@
 package com.motovehicle.vehicledealership.controller;
 
-import com.motovehicle.vehicledealership.model.AuthRequest;
 import com.motovehicle.vehicledealership.model.UserEntity;
 import com.motovehicle.vehicledealership.repository.UserRepository;
 import com.motovehicle.vehicledealership.security.JwtService;
