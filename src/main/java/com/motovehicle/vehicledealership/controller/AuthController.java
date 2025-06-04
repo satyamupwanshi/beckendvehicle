@@ -30,7 +30,7 @@ public class AuthController {
     private PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> login(@RequestBody UserEntity request) {
         authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
         );
@@ -42,7 +42,7 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<?> register(@RequestBody AuthRequest request) {
+    public ResponseEntity<?> register(@RequestBody UserEntity request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             return ResponseEntity.badRequest().body("Username already taken");
         }
