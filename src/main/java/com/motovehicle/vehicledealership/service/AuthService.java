@@ -1,6 +1,5 @@
 package com.motovehicle.vehicledealership.service;
 
-import com.motovehicle.vehicledealership.dto.RegisterRequest;
 import com.motovehicle.vehicledealership.model.UserEntity;
 import com.motovehicle.vehicledealership.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
