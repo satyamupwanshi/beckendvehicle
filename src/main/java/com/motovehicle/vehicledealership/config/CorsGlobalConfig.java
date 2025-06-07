@@ -14,7 +14,7 @@ public class CorsGlobalConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://frontendvehicle.vercel.app"));
+        config.setAllowedOrigins(List.of("https://frontendvehicle.vercel.app")); // no trailing slash
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true); // if using JWT/auth cookies
