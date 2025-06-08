@@ -1,6 +1,7 @@
 package com.motovehicle.vehicledealership.controller;
 
 import com.motovehicle.vehicledealership.model.Vehicle;
+import com.motovehicle.vehicledealership.service.CloudinaryService;
 import com.motovehicle.vehicledealership.service.VehicleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,8 @@ import java.util.List;
 public class VehicleController {
 
     @Autowired
+    private CloudinaryService cloudinaryService;
+    @Autowired
     private VehicleService vehicleService;
     @PostMapping(consumes = "multipart/form-data")
     public ResponseEntity<String> addVehicle(
@@ -24,6 +27,8 @@ public class VehicleController {
             @RequestParam double price,
             @RequestParam MultipartFile image
     ) throws IOException {
+
+        String imageUrl = cloudinaryService.uploadImage(image);
 
         String filename = System.currentTimeMillis() + "_" + image.getOriginalFilename();
         Path imagePath = Paths.get("uploads");
@@ -34,7 +39,7 @@ public class VehicleController {
                 .title(title)
                 .description(description)
                 .price(price)
-                .image(filename)
+                .image(imageUrl)
                 .build();
 
         vehicleService.saveVehicle(v);
