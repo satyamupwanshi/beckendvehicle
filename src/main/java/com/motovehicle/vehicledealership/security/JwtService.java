@@ -16,7 +16,7 @@ public class JwtService {
     private static final long EXPIRATION_TIME = 86400000; // 1 day
 
     private final String secret = "odD5m8OKtsK8eDTAsfdIf1j0jt4XyMlK3tEtrHPDgLg=";
-    private final Key secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
+    private final Key secretKey = Keys.secretKeyFor(SignatureAlgorithm.HS256);
 
     public String generateToken(String username) {
         return Jwts.builder()
