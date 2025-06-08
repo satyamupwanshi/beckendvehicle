@@ -14,12 +14,12 @@ public class CorsGlobalConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.setAllowedOrigins(List.of("https://frontendvehicle.vercel.app")); // no trailing slash
+        config.setAllowedOrigins(List.of("https://frontendvehicle.vercel.app"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "*"));
-        config.setExposedHeaders(List.of("Authorization"));  // Add this line
+        config.setExposedHeaders(List.of("Authorization"));
 
-        config.setAllowCredentials(true); // if using JWT/auth cookies
+        config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config);
