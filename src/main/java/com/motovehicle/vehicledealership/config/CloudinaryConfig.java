@@ -13,9 +13,9 @@ public class CloudinaryConfig {
     @Bean
     public Cloudinary cloudinary() {
         Map<String, String> config = ObjectUtils.asMap(
-                "cloud_name", "diar4w543",        // 🔁 Replace this
-                "api_key", "331673352869273",              // 🔁 Replace this
-                "api_secret", "4c_Ldbbk8cug9_RpnMkGXbHxpaw"         // 🔁 Replace this
+                "cloud_name", "diar4w543",
+                "api_key", "331673352869273",
+                "api_secret", "4c_Ldbbk8cug9_RpnMkGXbHxpaw"
         );
         return new Cloudinary(config);
     }
