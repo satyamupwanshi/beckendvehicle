@@ -6,7 +6,7 @@ import com.motovehicle.vehicledealership.repository.UserRepository;
 import com.motovehicle.vehicledealership.repository.VehicleRepository;
 import com.motovehicle.vehicledealership.service.CloudinaryService;
 import com.motovehicle.vehicledealership.service.VehicleService;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
+import org.springframework.security.core.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -60,7 +60,7 @@ public class VehicleController {
 
     @GetMapping("/my-vehicles")
     public ResponseEntity<?> getUserVehicles(Authentication authentication) {
-        String username = authentication.name();
+        String username = authentication.getName();
         UserEntity user = userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found"));
 
