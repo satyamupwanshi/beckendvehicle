@@ -37,7 +37,7 @@ public class AuthController {
         var user = userRepository.findByUsername(request.getUsername()).orElseThrow();
         String token = jwtService.generateToken(user.getUsername());
 
-        return ResponseEntity.ok(Map.of("token", token));
+        return ResponseEntity.ok(Map.of("token", token ,"role", user.getRole()));
     }
 
     @PostMapping("/register")

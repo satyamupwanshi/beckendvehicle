@@ -1,10 +1,15 @@
 package com.motovehicle.vehicledealership.controller;
 
+import com.motovehicle.vehicledealership.model.UserEntity;
 import com.motovehicle.vehicledealership.model.Vehicle;
+import com.motovehicle.vehicledealership.repository.UserRepository;
+import com.motovehicle.vehicledealership.repository.VehicleRepository;
 import com.motovehicle.vehicledealership.service.CloudinaryService;
 import com.motovehicle.vehicledealership.service.VehicleService;
+import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +24,12 @@ public class VehicleController {
 
     @Autowired
     private VehicleService vehicleService;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
+    private VehicleRepository vehicleRepository;
 
     // Endpoint to receive Cloudinary image URL from frontend
     @PostMapping("/cloud")
@@ -46,4 +57,16 @@ public class VehicleController {
     public List<Vehicle> listAvailableVehicles() {
         return vehicleService.getAllAvailableVehicles();
     }
+
+    @GetMapping("/my-vehicles")
+    public ResponseEntity<?> getUserVehicles(Authentication authentication) {
+        String username = authentication.name();
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        List<Vehicle> vehicles = vehicleRepository.findByUser(user);
+        return ResponseEntity.ok(vehicles);
+    }
+
+
 }
