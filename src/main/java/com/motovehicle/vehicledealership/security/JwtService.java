@@ -18,9 +18,10 @@ public class JwtService {
     private final String secret = "odD5m8OKtsK8eDTAsfdIf1j0jt4XyMlK3tEtrHPDgLg=";
     private final Key secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
 
-    public String generateToken(String username) {
+    public String generateToken(String username , String role) {
         return Jwts.builder()
                 .setSubject(username)
+                .claim("role", role)
                 .setIssuedAt(new Date())
                 .setExpiration(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .signWith(secretKey)
