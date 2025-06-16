@@ -4,6 +4,7 @@ import com.motovehicle.vehicledealership.security.JwtFilter;
 import com.motovehicle.vehicledealership.security.UserDetailsServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.*;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
@@ -35,6 +36,7 @@ public class SecurityConfig {
                         .requestMatchers("/uploads/**").permitAll() // ✅ allow access to image files
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
                         .requestMatchers("/api/vehicles/my-vehicles").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers(HttpMethod.GET, "/api/vehicles").permitAll()
                         .requestMatchers("/api/vehicles/**").authenticated()
                         .anyRequest().authenticated()
                 )
