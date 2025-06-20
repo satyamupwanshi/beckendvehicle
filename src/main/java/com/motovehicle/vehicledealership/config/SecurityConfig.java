@@ -33,10 +33,8 @@ public class SecurityConfig {
                         .requestMatchers("/api/auth/**").permitAll()                        // login/register
                         .requestMatchers("/uploads/**").permitAll()                          // public image access
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")              // only admin
-                        .requestMatchers(HttpMethod.GET, "/api/vehicles").permitAll()        // anyone can view vehicles
-                        .requestMatchers("/api/vehicles/my-vehicles").hasAnyAuthority("USER", "ADMIN") // dashboard
-                        .requestMatchers(HttpMethod.POST, "/api/vehicles/cloud").authenticated()       // add vehicle
-                        .requestMatchers(HttpMethod.DELETE, "/api/vehicles/**").authenticated()       // delete vehicle
+                        .requestMatchers("/api/vehicles/my-vehicles").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers( "/api/vehicles/**").authenticated()
                         .anyRequest().authenticated()                                         // default: login required
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
