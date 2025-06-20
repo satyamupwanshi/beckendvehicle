@@ -25,13 +25,6 @@ public class JwtFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
 
-        String path = request.getRequestURI();
-
-        if (request.getMethod().equals("GET") && request.getRequestURI().startsWith("/api/vehicles")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
 
         String authHeader = request.getHeader("Authorization");
         String token = null;

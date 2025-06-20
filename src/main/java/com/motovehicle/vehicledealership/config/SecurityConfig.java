@@ -31,7 +31,8 @@ public class SecurityConfig {
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()                        // login/register
-                        .requestMatchers("/uploads/**").permitAll()                          // public image access
+                        .requestMatchers("/uploads/**").permitAll()// public image access
+                        .requestMatchers(HttpMethod.GET, "/api/vehicles").permitAll()
                         .requestMatchers("/api/admin/**").hasAuthority("ADMIN")              // only admin
                         .requestMatchers("/api/vehicles/my-vehicles").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers( "/api/vehicles/**").authenticated()
