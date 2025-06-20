@@ -27,11 +27,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // Skip token check for public GET /api/vehicles
-        if (request.getMethod().equals("GET") && path.equals("/api/vehicles")) {
+        if (request.getMethod().equals("GET") && request.getRequestURI().startsWith("/api/vehicles")) {
             filterChain.doFilter(request, response);
             return;
         }
+
 
         String authHeader = request.getHeader("Authorization");
         String token = null;
