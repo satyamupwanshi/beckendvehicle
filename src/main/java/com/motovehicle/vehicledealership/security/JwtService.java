@@ -14,7 +14,6 @@ import java.util.function.Function;
 public class JwtService {
 
     private static final long EXPIRATION_TIME = 86400000; // 1 day
-
     private final String secret = "odD5m8OKtsK8eDTAsfdIf1j0jt4XyMlK3tEtrHPDgLg=";
     private final Key secretKey = Keys.hmacShaKeyFor(Base64.getDecoder().decode(secret));
 
@@ -26,7 +25,6 @@ public class JwtService {
                 .signWith(secretKey)
                 .compact();
     }
-
 
     public boolean validateToken(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
@@ -46,8 +44,7 @@ public class JwtService {
     }
 
     private <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build()
-                .parseClaimsJws(token).getBody();
+        final Claims claims = Jwts.parserBuilder().setSigningKey(secretKey).build().parseClaimsJws(token).getBody();
         return claimsResolver.apply(claims);
     }
 }

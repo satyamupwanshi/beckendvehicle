@@ -30,13 +30,15 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
                 .cors(Customizer.withDefaults())
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/auth/**").permitAll()                        // login/register
-                        .requestMatchers("/uploads/**").permitAll()// public image access
+                        // public endpoints
+                        .requestMatchers("/api/auth/**").permitAll()
+                        .requestMatchers("/uploads/**").permitAll()
                         .requestMatchers(HttpMethod.GET, "/api/vehicles").permitAll()
-                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")              // only admin
+                        .requestMatchers(HttpMethod.GET, "/api/vehicles/**").permitAll()
                         .requestMatchers("/api/vehicles/my-vehicles").hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers( "/api/vehicles/**").authenticated()
-                        .anyRequest().authenticated()                                         // default: login required
+                        .requestMatchers(HttpMethod.POST, "/api/vehicles/cloud").authenticated()
+                        .requestMatchers("/api/admin/**").hasAuthority("ADMIN")
+                        .anyRequest().authenticated()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .userDetailsService(userDetailsService)
