@@ -66,15 +66,5 @@ public class VehicleController {
         return vehicleService.getAllAvailableVehicles();
     }
 
-    @GetMapping("/my-vehicles")
-    public ResponseEntity<?> getUserVehicles(Authentication authentication) {
-        String username = authentication.getName();
-        UserEntity user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
-
-        List<Vehicle> vehicles = vehicleRepository.findByUser(user);
-        return ResponseEntity.ok(vehicles);
-    }
-
 
 }

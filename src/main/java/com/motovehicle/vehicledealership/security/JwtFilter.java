@@ -29,7 +29,7 @@ public class JwtFilter extends OncePerRequestFilter {
         String path = request.getRequestURI();
         String method = request.getMethod();
 
-        // Allow all GET and OPTIONS on /api/vehicles endpoints
+        // ✅ Allow unauthenticated GET and OPTIONS for /api/vehicles
         if ((method.equalsIgnoreCase("GET") || method.equalsIgnoreCase("OPTIONS"))
                 && path.startsWith("/api/vehicles")) {
             filterChain.doFilter(request, response);
@@ -59,4 +59,5 @@ public class JwtFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+
 }

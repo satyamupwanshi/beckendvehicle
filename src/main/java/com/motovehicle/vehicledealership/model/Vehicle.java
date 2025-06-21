@@ -37,7 +37,4 @@ public class Vehicle {
         this.postedOn = LocalDateTime.now();
     }
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private  UserEntity user;
 }

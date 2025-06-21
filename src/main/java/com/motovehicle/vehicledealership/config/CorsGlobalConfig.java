@@ -18,6 +18,8 @@ public class CorsGlobalConfig {
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         config.setAllowedHeaders(List.of("Authorization", "Content-Type", "*"));
         config.setExposedHeaders(List.of("Authorization"));
+        config.setMaxAge(3600L); // cache preflight response
+
 
         config.setAllowCredentials(true);
 
