@@ -12,5 +12,4 @@ import java.util.List;
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
     List<Vehicle> findByIsSoldFalse();
 
-    List<Vehicle> findByUser(UserEntity user);
 }
