@@ -53,7 +53,6 @@ public class VehicleController {
                 .description(description)
                 .price(price)
                 .image(imageUrl)
-                .user(user) // ✅ attach user
                 .build();
 
         vehicleService.saveVehicle(vehicle);
