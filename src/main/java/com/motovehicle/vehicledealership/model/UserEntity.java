@@ -22,7 +22,7 @@ public class UserEntity {
     private String password;
     private String role;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonIgnore
     private List<Vehicle> vehicles;
 }
