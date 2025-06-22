@@ -1,5 +1,6 @@
 package com.motovehicle.vehicledealership.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,5 +23,6 @@ public class UserEntity {
     private String role;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Vehicle> vehicles;
 }
