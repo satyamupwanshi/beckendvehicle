@@ -6,6 +6,7 @@ import com.motovehicle.vehicledealership.repository.UserRepository;
 import com.motovehicle.vehicledealership.repository.VehicleRepository;
 import com.motovehicle.vehicledealership.service.CloudinaryService;
 import com.motovehicle.vehicledealership.service.VehicleService;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication; // ✅ CORRECT
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -64,6 +65,24 @@ public class VehicleController {
     @GetMapping
     public List<Vehicle> listAvailableVehicles() {
         return vehicleService.getAllAvailableVehicles();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteVehicle(@PathVariable Long id, Authentication authentication) {
+        String username = authentication.getName();
+        UserEntity user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        Vehicle vehicle = vehicleRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Vehicle not found"));
+
+        // Optional: check if the user owns the vehicle
+        if (!vehicle.getUser().getId().equals(user.getId())) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Not authorized to delete this vehicle");
+        }
+
+        vehicleRepository.delete(vehicle);
+        return ResponseEntity.ok("Vehicle deleted successfully");
     }
 
 
