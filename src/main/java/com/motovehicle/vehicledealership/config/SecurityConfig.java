@@ -38,6 +38,7 @@ public class SecurityConfig {
 
                         // Authenticated APIs
                         .requestMatchers("/api/my-vehicles").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/api/chat/**").authenticated() // ✅ Add this
                         .requestMatchers(HttpMethod.POST, "/api/vehicles/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/vehicles/**").authenticated()
 
